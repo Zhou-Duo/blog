@@ -6,16 +6,35 @@ const app = express();
 app.use(bodyParser.json());
 
 const port = 4005;
+const events = [];
 
 app.post('/events', (req, res) => {
   const event = req.body;
 
-  axios.post('http://localhost:4000/events', event); // posts
-  axios.post('http://localhost:4001/events', event); // comments
-  axios.post('http://localhost:4002/events', event); // query
-  axios.post('http://localhost:4003/events', event); // moderation
+  events.push(event);
+
+  axios.post('http://localhost:4000/events', event).catch((err) => {
+    // posts
+    console.log(err.message);
+  });
+  axios.post('http://localhost:4001/events', event).catch((err) => {
+    // comments
+    console.log(err.message);
+  });
+  axios.post('http://localhost:4002/events', event).catch((err) => {
+    // query
+    console.log(err.message);
+  });
+  axios.post('http://localhost:4003/events', event).catch((err) => {
+    // moderation
+    console.log(err.message);
+  });
 
   res.send({ status: 'OK' });
+});
+
+app.get('/events', (req, res) => {
+  res.send(events);
 });
 
 app.listen(port, () => {
