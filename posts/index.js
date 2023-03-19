@@ -40,6 +40,5 @@ app.post('/events', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log('new version');
   console.log(`Listening on port ${port}`);
 });
