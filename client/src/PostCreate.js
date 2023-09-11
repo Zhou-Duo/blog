@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
 import axios from 'axios';
+import React, { useState } from 'react';
 
 // eslint-disable-next-line
 export default () => {
   const [title, setTitle] = useState('');
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // prevent the default behavior of an element in response to a user action
 
     await axios.post('http://blog.com/posts/create', {
       title,
@@ -18,14 +18,14 @@ export default () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <div className='form-group'>
           <label>Title</label>
           <input
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="form-control"
+            className='form-control'
           />
-          <button className="btn btn-primary">Submit</button>
+          <button className='btn btn-primary'>Submit</button>
         </div>
       </form>
     </div>
